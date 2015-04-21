@@ -1,0 +1,33 @@
+.two-way-binding {
+  padding: 20px;
+}
+  .two-way-binding .mainImg {
+    width: 160px;
+    height: 195px;
+    border: thin dashed red;
+    float: right;
+    margin: 0px 0px 10px 5px;
+  }
+
+  .two-way-binding .thumbs {
+    clear: both;
+    overflow: auto;
+    border: thin solid silver;
+    padding: 5px 10px;
+  }
+
+  .two-way-binding .thumbDiv {
+    border: thin solid green;
+    padding: 5px;
+    margin: 10px 0px;
+    overflow: auto;
+  }
+
+  .two-way-binding .thumb {
+    width: 80px;
+    height: 87px;
+    border: thin solid black;
+    cursor: pointer;
+    float: left;
+    margin-right: 5px;
+  }

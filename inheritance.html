@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="prodigious">
+	<head>
+	  <meta charset="utf-8" />
+	  <title>AngularJS Plunker</title>
+	  <script>document.write('<base href="' + document.location + '" />');</script>
+	  <script data-require="angular.js@1.0.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js" data-semver="1.0.7"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	  <link rel="stylesheet" href="css/demo.css" />	  
+	</head>
+
+	<body>
+	 <div class="container">
+	 	<nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Angular Scope Demos</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="inheritance.html">Inheritance</a></li>
+            <li><a href="isolatedscope.html">Isolated Scope</a></li>
+            <li><a href="index.html">Binding</a></li>
+            <li><a href="directives.html">Directive Scopes</a></li>
+            <li><a href="controllers.html">Controllers</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+    <h1>Prototypal Inheritance</h1>
+    <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h2 class="panel-title">Example</h2>
+	    </div>
+	    <div class="panel-body">
+			 	<p>Open your browser webdeveloper console to see the prototypal inheritance properties.</p>
+			 	<img src="https://camo.githubusercontent.com/57f1938d241122bf49583ed64ee093e45e5dd012/687474703a2f2f692e737461636b2e696d6775722e636f6d2f32516365552e706e67" />
+
+			 	<h3>When I create a new object directly to the child</h3>
+				<img src="https://camo.githubusercontent.com/4679189c134e25e7dd7fcee18bc676cf9ec6b295/687474703a2f2f692e737461636b2e696d6775722e636f6d2f684b6574482e706e67" />
+
+				<div>
+					<button type="button" class="btn btn-lg btn-success" id="actionButton">View Inheritance Example in the console</button>
+				</div>
+				<h2>Get Advice</h2>
+				<div class="alert alert-danger" role="alert">The following create new scopes, and <strong>inherit prototypically</strong></div>
+				<ul class="list-group">
+	        <li class="list-group-item">ng-repeat</li>
+	        <li class="list-group-item">ng-include</li>
+	        <li class="list-group-item">ng-view</li>
+	        <li class="list-group-item">ng-switch</li>
+	        <li class="list-group-item">ng-controller</li>
+	        <li class="list-group-item">directive with scope: true</li>
+	        <li class="list-group-item">directive with transclude: true</li>
+	      </ul>
+				<div class="alert alert-danger" role="alert">The following create new scopes, and <strong>inherit prototypically</strong></div>
+				<p>directive with scope: { ... }. This creates an "isolate" scope instead.</p>
+		 </div>
+	 </div>
+	 <hr>
+	 <h2>Using Primitive Parameters</h2>
+	<div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Example</h2>
+    </div>
+	  <div class="panel-body">
+	    <div ng-controller="firstCtrl">
+			  <div class="form-group">
+			    <label for="ex1">Referencing a primitive Value</label>
+			    <script type="text/ng-template" id="/tpl1.html">
+			    	<input ng-model="myPrimitive" type="text" class="form-control" id="ex1">
+			    </script>
+			    <div ng-include src="'/tpl1.html'"></div>
+			  </div>
+			  <div class="form-group">
+			    <label for="ex2">Referencing an Object</label>
+			    <script type="text/ng-template" id="/tpl2.html">
+				  	<input ng-model="myObject.aNumber" type="text" class="form-control" id="ex2">
+					</script>
+					<div ng-include src="'/tpl2.html'"></div>			    
+			  </div>
+			  <div class="form-group">
+			    <label for="ex3">Referencing an Object calling $parent</label>
+			    <script type="text/ng-template" id="/tpl3.html">
+				  	<input ng-model="$parent.myPrimitive" type="text" class="form-control" id="ex3">
+					</script>
+					<div ng-include src="'/tpl3.html'"></div>	    
+			  </div>
+				<ul class="list-group">
+	        <li class="list-group-item">Primitive Change: {{myPrimitive}}</li>
+	        <li class="list-group-item">Object Change: {{myObject.aNumber}}</li>
+	        <li class="list-group-item">Primitive Change Using Parent : {{myPrimitive}}</li>
+	      </ul>
+			 </div>   
+    </div>
+  </div>
+	 
+
+
+
+	 <script src="js/inheritance.js"></script>
+	</body>
+
+</html>

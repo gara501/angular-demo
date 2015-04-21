@@ -1,0 +1,45 @@
+Scope: 
+Extensiones de objetos nativos
+Trabajan como "pegante" entre las vistas y los otros objetos (controladores, servicios, directivas)
+scope: { ... } Crea un objeto del cual no se puede heredar (usado en directivas que se usan como componentes)
+scope: true, crea un objeto heredable prototipicamente (herencia de prototipos)
+Herencia de prototipos (Usar el . en la definición de los modelos)
+
+<input type="text" ng-model="someObj.prop1"> rather than 
+<input type="text" ng-model="prop1">
+
+https://camo.githubusercontent.com/7f2d4d76e472463fa2980802a08cb3bedca7e0cd/687474703a2f2f692e737461636b2e696d6775722e636f6d2f3536756f652e706e67
+
+El intentar cambiar una primitiva definida en el padre, desde el hijo, NO FUNCIONA, por que se terminan
+creando nuevos elementos en el objeto hijo. (NO se pueden modificar primtivos)
+Solución: crear un objeto en el padre para modificar la primitiva.
+$scope.setMyPrimitive = function(value) {
+    $scope.myPrimitive = value;
+}
+
+Pasar datos entre controladores: Se deben usar servicios (buenas practicas)
+Scope: true crea un nuevo child scope (ng-if, ng-show) only one child scope can be created.
+Scope: false usa el mismo scope del padre, no recomendado para componentes
+Scope: {...} crea un isolated scope. No tiene herencia de prototipos.
+Si se quiere modificar algo del padre se usa el simbolo = (two way binding)
+Se usa @ para one way binding (parent to isolate)
+Se usa & para hacer un bind de las expresiones del padre.
+Para acceder a las funciones padre, se debe declarar una propiedad en la directiva.
+<div my-directive the-Parent-Prop=parentProp> and scope: { localProp: '@theParentProp' }. 
+
+transclude:true se crea un nuevo child scope en la directiva que hereda prototipicamente del padre
+Se usa $parent para acceder a las propiedades y se debe garantizar que el modelo sea un objeto
+y el bind una propiedad de ese objeto.
+
+
+
+
+
+Elementos como ng-repeat, ng-switch, ng-view crean su propio scope
+
+
+rootScope:
+Objeto principal del cual heredan todos los scope de la aplicación
+
+
+Mas info: https://github.com/angular/angular.js/wiki/Understanding-Scopes

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="prodigious">
+	<head>
+	  <meta charset="utf-8" />
+	  <title>AngularJS Plunker</title>
+	  <script>document.write('<base href="' + document.location + '" />');</script>
+	  <script data-require="angular.js@1.0.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js" data-semver="1.0.7"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	  <link rel="stylesheet" href="css/demo.css" />	  
+	</head>
+
+	<body>
+	 <div class="container">
+	 	<nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Angular Scope Demos</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="inheritance.html">Inheritance</a></li>
+            <li><a href="isolatedscope.html">Isolated Scope</a></li>
+            <li><a href="index.html">Binding</a></li>
+            <li class="active"><a href="directives.html">Directive Scopes</a></li>
+            <li><a href="controllers.html">Controllers</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+    <h1>Directive Scopes</h1>
+    <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h2 class="panel-title">Examples</h2>
+	    </div>
+	    <div class="panel-body">
+	    	<h3>There are four types of scopes:</h3>
+	    	<ul class="list-group">
+	    		<li class="list-group-item">Using the same scope that the parent <strong>scope: false</strong> This is not a good choice 
+	    			for writing directives that are intended as reusable components.
+	    		</li>
+	        <li class="list-group-item">normal prototypal scope inheritance -- ng-include, ng-switch, 
+	        	ng-controller, directive with <strong>scope: true</strong></li>
+	        <li class="list-group-item">normal prototypal scope inheritance with a copy/assignment -- 
+	        	ng-repeat. Each iteration of ng-repeat creates a new child scope, and that new child scope always gets a new property.</li>
+	        <li class="list-group-item">isolate scope -- directive with scope: {...}. This one is not prototypal, but '=', 
+	        	'@', and '&' provide a mechanism to access parent scope properties, via attributes.</li>
+	        <li class="list-group-item">transcluded scope -- directive with <strong>transclude: true</strong>. 
+	        	This one is also normal prototypal scope inheritance, but it is also a sibling of any isolate scope.</li>
+	        <li class="list-group-item">For all scopes (prototypal or not), Angular always tracks a parent-child 
+	        	relationship (i.e., a hierarchy), via properties $parent and $$childHead and $$childTail. 	</li>
+	      </ul>
+
+
+	      <script type="text/ng-template" id="partials/notebook-directive.html">
+			    <ul class="list-group">
+			        <li class="list-group-item" ng-repeat="note in notes">
+			            <my-note class="span2 thumbnail" delete="deleteNote(note.id)" note="note">
+			                <button class="btn btn-large close pull-right" ng-click="delete()">&times;</button>
+			                <hr/>
+			                <p>{{note.title}}</p>
+			            </my-note>
+			        </li>
+			    </ul>
+			  </script>
+
+		    <div ng-controller="NotebookCtrl">
+		        <div class="page-header">
+		            <h1>AngularJS Sticky Notes</h1>
+		        </div>
+		        <div class="form-actions">
+		            <div class="input-append">
+		                <form ng-submit="addNote(noteTitle);resetForm();">
+		                	<div class="form-group">
+								        <input ng-model="noteTitle" size="16" type="text" class="form-control" placeholder="Add a note">
+								      </div>
+	                    <button class="btn btn-success" type="button"
+		                        ng-disabled="!noteTitle" ng-click="addNote(noteTitle);resetForm();">Add Note
+	                    </button>   
+		                </form>
+		            </div>
+		        </div>
+		     <div>
+		     	<my-notebook notes="getNotes()" ondelete="deleteNote(id)"></my-notebook>
+		     </div>
+		    </div>
+
+
+
+		  </div>
+	 </div>
+	 <hr>
+	 
+	 <script src="js/directives.js"></script>
+	</body>
+
+</html>
