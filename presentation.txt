@@ -5,6 +5,11 @@ scope: { ... } Crea un objeto del cual no se puede heredar (usado en directivas 
 scope: true, crea un objeto heredable prototipicamente (herencia de prototipos)
 Herencia de prototipos (Usar el . en la definición de los modelos)
 
+Two Way Data Binding
+1.When properties in the model get updated, so does the UI.
+2.When UI elements get updated, the changes get propagated back to the model.
+
+
 <input type="text" ng-model="someObj.prop1"> rather than 
 <input type="text" ng-model="prop1">
 
@@ -24,6 +29,14 @@ Scope: {...} crea un isolated scope. No tiene herencia de prototipos.
 Si se quiere modificar algo del padre se usa el simbolo = (two way binding)
 Se usa @ para one way binding (parent to isolate)
 Se usa & para hacer un bind de las expresiones del padre.
+This is used to bind any methods from the parent scope to the directive scope
+
+
+1. "@"   (  Text binding / one-way binding )
+2. "="   ( Direct model binding / two-way binding )
+3. "&"   ( Behaviour binding / Method binding  )
+
+
 Para acceder a las funciones padre, se debe declarar una propiedad en la directiva.
 <div my-directive the-Parent-Prop=parentProp> and scope: { localProp: '@theParentProp' }. 
 

@@ -41,11 +41,13 @@
     </div>
     <div class="panel-body">
        <div ng-controller="firstCtrl">
-        <div ng-repeat="item in items">
-          <p>{{item}}</p>
+        <div my-directive
+          class="directive"
+          name="{{name}}"
+          reverse="reverseName()"
+          random="randomColor()"
+          color="color" >
         </div>
-        <directive-one attribute-dir="{{hey}}"></directive-one>
-        <directive-two attribute-dir="hey" new-hey="updateParams(newHeyData)"></directive-two>
        </div>  
     </div>
   </div>
@@ -53,7 +55,7 @@
 
 
 
-   <script src="js/inheritance.js"></script>
+   <script src="js/isolatedScope.js"></script>
   </body>
 
 </html>

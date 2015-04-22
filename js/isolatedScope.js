@@ -1,40 +1,30 @@
-var app = angular.module('prodigious',[]);
-
-app.controller('firstCtrl', ['$scope', function($scope){
-   $scope.items = ['one','two','three','four'];
-   $scope.hey = 'Hey Directive!';
-   $scope.newHeyData = 'Its me again!';
-   $scope.heyObject = { name: 'Igor', address: '123 Somewhere' };
-   
-   $scope.updateParams = function(newParams) {
-   	$scope.hey = newParams;
-   	console.log('Params Changed');
-   }
-}]); //Isolated Scope
-app.directive('directiveOne', function () {
-    return {
-    		restrict:'E',
-        scope:{
-          attributeDir:'@'
-        },
-        link:function (scope, element, attrs) {
-          console.log(scope);
-        }        
+ var app = angular.module("prodigious", []);
+ app.controller("firstCtrl", function( $scope ){
+    $scope.name = "Andres";
+    $scope.color = "#333333";
+    $scope.reverseName = function(){
+     $scope.name = $scope.name.split("").reverse().join("");
     };
-}); //Isolated Scope Two Binding mode
-app.directive('directiveTwo', function () {
+    $scope.randomColor = function(){
+        $scope.color = '#'+Math.floor(Math.random()*16777215).toString(16);
+    };
+});
+app.directive("myDirective", function(){
     return {
-    		restrict:'E',
-        scope:{
-          attributeTwo:'=attributeDir',
-          newHey : '&'
+        restrict: "EA",
+        scope: {
+            name: "@",
+            color: "=",
+            reverse: "&",
+            random: "&"
         },
-        controller:function ($scope, $attrs) {
-          $scope.updateParams = function (newParams) {
-            $scope.newHey({newParams:newParams});
-            console.log('DATA');
-          }
-          console.log($scope);
-        }
+        template: [
+            "<div class='form-group'>",
+            "Change name:<input  class='form-control' type='text' ng-model='name' />",
+            "<input type='button' class='btn btn-default' ng-click='reverse()' value='Reverse Name'/></div>",
+            "<div class='form-group'>",
+            "Change color:<input type='text' class='form-control' ng-model='color' />",
+            "<input type='button' class='btn btn-default' ng-click='random()' value='Random Color'/></div>"
+        ].join("")
     };
 });
